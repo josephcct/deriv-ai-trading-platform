@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  frontend:
+    image: frontend-image:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    image: backend-image:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - ai-engine
+
+  ai-engine:
+    image: ai-image:latest
+    build:
+      context: ./ai-engine
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
